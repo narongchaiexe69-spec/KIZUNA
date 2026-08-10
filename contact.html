@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อเรา - KIZUNA</title>
+    <style>
+        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; }
+        .nav-links a.active { color: var(--accent); }
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; flex: 1; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .contact-card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #eee; text-align: center; }
+        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 2rem; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">絆 KIZUNA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="menu.html">เมนู</a></li>
+                <li><a href="promotions.html">โปรโมชั่น</a></li>
+                <li><a href="gallery.html">บรรยากาศ</a></li>
+                <li><a href="reservation.html">จองโต๊ะ</a></li>
+                <li><a href="contact.html" class="active">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">ติดต่อเรา</h2>
+        <div class="grid">
+            <div class="contact-card">
+                <h3>📍 ที่อยู่</h3>
+                <!-- แก้ไขที่อยู่เป็นเชียงใหม่ให้ถูกต้องเรียบร้อยครับ -->
+                <p style="margin-top:0.5rem;">12/3 ถนนนิมมานเหมินท์ ซอย 9<br>ต.สุเทพ อ.เมือง จ.เชียงใหม่ 50200</p>
+            </div>
+            <div class="contact-card">
+                <h3>⏰ เวลาเปิด-ปิด</h3>
+                <p style="margin-top:0.5rem;">เปิดทุกวัน<br>11:30 - 22:30 น.</p>
+            </div>
+            <div class="contact-card">
+                <h3>📞 ช่องทางติดต่อ</h3>
+                <!-- ปรับเบอร์โทรเป็นรหัสรหัสพื้นที่เชียงใหม่ (012) ให้สมบูรณ์ -->
+                <p style="margin-top:0.5rem;">โทร: 012-345-6789<br>LINE: @kizunath</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>โปรโมชั่น - KIZUNA</title>
+    <style>
+        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; }
+        .nav-links a.active { color: var(--accent); }
+        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; flex: 1; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; }
+        .promo-card { background: var(--white); padding: 2rem; border-radius: 12px; border-left: 6px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 2rem; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">絆 KIZUNA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="menu.html">เมนู</a></li>
+                <li><a href="promotions.html" class="active">โปรโมชั่น</a></li>
+                <li><a href="gallery.html">บรรยากาศ</a></li>
+                <li><a href="reservation.html">จองโต๊ะ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <h2 class="section-title">โปรโมชั่นพิเศษ</h2>
+        <div class="promo-card">
+            <h3 style="color: var(--primary); font-size: 1.6rem;">🔥 มา 4 จ่าย 3 บุฟเฟต์แซลมอน</h3>
+            <p style="margin-top: 0.5rem; color: var(--gray);">เฉพาะวันจันทร์ - พฤหัสบดี เวลา 11:00 - 16:00 น.</p>
+        </div>
+        <div class="promo-card">
+            <h3 style="color: var(--primary); font-size: 1.6rem;">🎉 ฉลองวันเกิด รับส่วนลด 15%</h3>
+            <p style="margin-top: 0.5rem; color: var(--gray);">เพียงแสดงบัตรประชาชน รับส่วนลดค่าอาหารทันที (ตลอดเดือนเกิด)</p>
+        </div>
+    </main>
+    <footer><p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p></footer>
+</body>
+</html>

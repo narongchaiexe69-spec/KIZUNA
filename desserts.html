@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ของหวาน & เครื่องดื่ม - 絆 KIZUNA</title>
+    <style>
+        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --bg-card: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sukhumvit Set', 'Kanit', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; transition: 0.3s; padding: 0.5rem 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+        .container { max-width: 1200px; margin: 4rem auto; padding: 0 1.5rem; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { text-align: center; color: var(--gray); margin-bottom: 3rem; font-size: 1.1rem; }
+        .menu-category-title { color: var(--primary); font-size: 1.8rem; margin: 2.5rem 0 1.5rem 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--bg-card); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
+        .card-content { padding: 1.2rem; }
+        .card-title { font-size: 1.2rem; color: var(--dark); margin-bottom: 0.2rem; }
+        .card-title-jp { color: var(--gray); font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .card-desc { color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem; height: 3.2em; overflow: hidden; }
+        .card-price { color: var(--primary); font-size: 1.4rem; font-weight: bold; }
+        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 3rem 2rem; margin-top: 5rem; }
+        .footer-logo { color: var(--accent); font-size: 2rem; font-weight: bold; margin-bottom: 1rem; display: block; text-decoration: none; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">絆 KIZUNA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="menu.html" class="active">เมนูอาหาร</a></li>
+                <li><a href="promotions.html">โปรโมชั่น</a></li>
+                <li><a href="gallery.html">บรรยากาศ</a></li>
+                <li><a href="reservation.html">จองโต๊ะ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">🍡 ของหวาน & เครื่องดื่ม</h2>
+        <p class="section-subtitle">ปิดท้ายมื้ออร่อยด้วยขนมหวานสไตล์ญี่ปุ่นและเครื่องดื่มเย็นชื่นใจ</p>
+
+        <!-- หมวดของหวาน -->
+        <h3 class="menu-category-title">Japanese Desserts (ของหวานญี่ปุ่น)</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="201606151140_4.jpg" alt="Uji Matcha Parfait" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Uji Matcha Parfait</h4>
+                    <p class="card-title-jp">宇治抹茶パフェ</p>
+                    <p class="card-desc">พาร์เฟต์ไอศกรีมมัทฉะอุจิ ถั่วแดงอะซูกิ ชิราทามะ และวาราบิโมจิ</p>
+                    <p class="card-price">฿250</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (10).jpg" alt="Matcha Warabi Mochi" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Matcha Warabi Mochi</h4>
+                    <p class="card-title-jp">抹茶わらび餅</p>
+                    <p class="card-desc">วาราบิโมจิเนื้อหนึบ คลุกผงชาเขียวเกียวโต ราดซอสน้ำตาลดำคุโรมิสึ</p>
+                    <p class="card-price">฿160</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (11).jpg" alt="Strawberry Daifuku" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Strawberry Daifuku</h4>
+                    <p class="card-title-jp">いちご大福</p>
+                    <p class="card-desc">ไดฟูกุแป้งเหนียวนุ่ม สอดไส้สตรอว์เบอร์รีสดและถั่วแดงกวน (3 ชิ้น)</p>
+                    <p class="card-price">฿180</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (12).jpg" alt="Hojicha Kakigori" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Hojicha Kakigori</h4>
+                    <p class="card-title-jp">ほうじ茶かき氷</p>
+                    <p class="card-desc">น้ำแข็งไสสไตล์ญี่ปุ่น ราดซอสชาโฮจิฉะคั่วหอม ท็อปด้วยครีมนม</p>
+                    <p class="card-price">฿220</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="shutterstock_1891949899-1.jpg" alt="Hokkaido Milk Pudding" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Hokkaido Milk Pudding</h4>
+                    <p class="card-title-jp">北海道ミルプリン</p>
+                    <p class="card-desc">พุดดิ้งนมสดฮอกไกโด นุ่มละมุน ละลายในปาก ราดซอสคาราเมล</p>
+                    <p class="card-price">฿130</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (13).jpg" alt="Matcha Ice Cream" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Premium Matcha Scoop</h4>
+                    <p class="card-title-jp">抹茶アイスクリーム</p>
+                    <p class="card-desc">ไอศกรีมชาเขียวเข้มข้นระดับ 5 เสิร์ฟพร้อมถั่วแดงกวน (1 สกู๊ป)</p>
+                    <p class="card-price">฿95</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- หมวดเครื่องดื่ม & สาเก -->
+        <h3 class="menu-category-title">Beverages & Sake (เครื่องดื่ม & สาเก)</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="images (14).jpg" alt="Japanese Green Tea" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Hot / Iced Sencha Tea</h4>
+                    <p class="card-title-jp">煎茶 (รีฟิล)</p>
+                    <p class="card-desc">ชาเขียวเซ็นฉะแท้จากญี่ปุ่น หอมกลิ่นชาธรรมชาติ (เติมได้ตลอด)</p>
+                    <p class="card-price">฿50</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (15).jpg" alt="Yuzu Soda" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Yuzu Sparkling Soda</h4>
+                    <p class="card-title-jp">柚子ソーダ</p>
+                    <p class="card-desc">น้ำส้มยูซุแท้จากเมืองโคจิ ผสมโซดาและเนื้อส้ม ให้ความสดชื่น</p>
+                    <p class="card-price">฿135</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (16).jpg" alt="Matcha Latte" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Iced Uji Matcha Latte</h4>
+                    <p class="card-title-jp">抹茶ラテ</p>
+                    <p class="card-desc">มัทฉะเกียวโตพรีเมียม ชงสดใส่นมสดฮอกไกโด หวานกลมกล่อม</p>
+                    <p class="card-price">฿145</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (17).jpg" alt="Junmai Daiginjo Sake" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Junmai Daiginjo Sake</h4>
+                    <p class="card-title-jp">純米大吟醸 (720ml)</p>
+                    <p class="card-desc">สาเกชั้นเลิศ กลิ่นหอมผลไม้อ่อนๆ รสนุ่มคอ เสิร์ฟแบบแช่เย็น</p>
+                    <p class="card-price">฿2,600</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (18).jpg" alt="Asahi Beer" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Asahi Draft Beer</h4>
+                    <p class="card-title-jp">アサヒ生ビール (Mug)</p>
+                    <p class="card-desc">เบียร์สดอาซาฮี รสชาติฟองนุ่มละมุน เสิร์ฟในแก้วแช่เย็น</p>
+                    <p class="card-price">฿150</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="Umeshu-Japanese-Drink.jpg" alt="Umeshu" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Plum Wine (Umeshu)</h4>
+                    <p class="card-title-jp">梅酒 (Glass)</p>
+                    <p class="card-desc">เหล้าบ๊วยญี่ปุ่น รสชาติหวานเปรี้ยวกลมกล่อม </p>
+                    <p class="card-price">฿180</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="index.html" class="footer-logo">絆 KIZUNA</a>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #ccc;">&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

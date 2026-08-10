@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จองโต๊ะล่วงหน้า - 絆 KIZUNA</title>
+    <style>
+        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --bg-card: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sukhumvit Set', 'Kanit', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; transition: 0.3s; padding: 0.5rem 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+        
+        .container { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { text-align: center; color: var(--gray); margin-bottom: 2.5rem; font-size: 1.1rem; }
+        
+        .form-card { background: var(--bg-card); padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eee; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 1.2rem; }
+        .form-group.full-width { grid-column: span 2; }
+        .form-group label { font-weight: bold; margin-bottom: 0.5rem; color: var(--dark); font-size: 0.95rem; }
+        .form-group input, .form-group select, .form-group textarea { padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(158, 27, 27, 0.1); }
+        
+        .btn-submit { width: 100%; padding: 1rem; background-color: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 1rem; }
+        .btn-submit:hover { background-color: #7a1414; }
+        
+        .info-box { background: #fdf8ed; border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin-bottom: 2rem; border-radius: 4px; font-size: 0.95rem; color: #555; }
+
+        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 3rem 2rem; margin-top: 5rem; }
+        .footer-logo { color: var(--accent); font-size: 2rem; font-weight: bold; margin-bottom: 1rem; display: block; text-decoration: none; }
+        
+        @media (max-width: 768px) { 
+            .nav-links { display: none; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">絆 KIZUNA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="menu.html">เมนูอาหาร</a></li>
+                <li><a href="promotions.html">โปรโมชั่น</a></li>
+                <li><a href="gallery.html">บรรยากาศ</a></li>
+                <li><a href="reservation.html" class="active">จองโต๊ะ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">🍣 สำรองโต๊ะล่วงหน้า</h2>
+        <p class="section-subtitle">สัมผัสประสบการณ์อาหารญี่ปุ่นระดับพรีเมียม กรุณากรอกข้อมูลเพื่อสำรองที่นั่ง</p>
+
+        <div class="form-card">
+            <div class="info-box">
+                📌 **หมายเหตุ:** กรุณาสำรองโต๊ะล่วงสูงสุดอย่างน้อย 2 ชั่วโมง ทางร้านจะเก็บโต๊ะไว้ให้ท่านเป็นเวลา 15 นาทีหลังจากเวลาที่จองไว้
+            </div>
+
+            <form action="#" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullname">ชื่อ - นามสกุล *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="เช่น คุณสมชาย ใจดี" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">เบอร์โทรศัพท์ *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="เช่น 081-234-5678" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">วันที่ต้องการจอง *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">เวลาที่ต้องการ *</label>
+                        <select id="time" name="time" required>
+                            <option value="">-- เลือกช่วงเวลา --</option>
+                            <option value="11:30">11:30 น.</option>
+                            <option value="12:00">12:00 น.</option>
+                            <option value="12:30">12:30 น.</option>
+                            <option value="13:00">13:00 น.</option>
+                            <option value="17:30">17:30 น.</option>
+                            <option value="18:00">18:00 น.</option>
+                            <option value="18:30">18:30 น.</option>
+                            <option value="19:00">19:00 น.</option>
+                            <option value="19:30">19:30 น.</option>
+                            <option value="20:00">20:00 น.</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">จำนวนท่าน *</label>
+                        <select id="guests" name="guests" required>
+                            <option value="1">1 ท่าน</option>
+                            <option value="2" selected>2 ท่าน</option>
+                            <option value="3">3 ท่าน</option>
+                            <option value="4">4 ท่าน</option>
+                            <option value="5-6">5-6 ท่าน</option>
+                            <option value="7+">7 ท่านขึ้นไป (ห้อง VIP)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zone">โซนที่ต้องการ</label>
+                        <select id="zone" name="zone">
+                            <option value="main">โซนห้องโถงหลัก (Main Hall)</option>
+                            <option value="counter">เคาน์เตอร์บาร์บาร์เชฟ (Chef's Counter)</option>
+                            <option value="tatami">ห้องเสื่อทาทามิ (Tatami Room)</option>
+                            <option value="vip">ห้องรับรองส่วนตัว VIP</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="note">คำขอเพิ่มเติม / แพ้อาหาร</label>
+                        <textarea id="note" name="note" rows="4" placeholder="ระบุเพิ่มเติม เช่น แพ้อาหารทะเล, ต้องการเก้าอี้เด็ก, ฉลองวันเกิด ฯลฯ"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">ยืนยันการจองโต๊ะ</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <a href="index.html" class="footer-logo">絆 KIZUNA</a>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #ccc;">&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

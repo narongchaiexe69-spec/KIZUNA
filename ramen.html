@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ราเมง & ข้าวหน้าต่างๆ - 絆 KIZUNA</title>
+    <style>
+        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --bg-card: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Sukhumvit Set', 'Kanit', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; transition: 0.3s; padding: 0.5rem 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+        .container { max-width: 1200px; margin: 4rem auto; padding: 0 1.5rem; }
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-subtitle { text-align: center; color: var(--gray); margin-bottom: 3rem; font-size: 1.1rem; }
+        .menu-category-title { color: var(--primary); font-size: 1.8rem; margin: 2.5rem 0 1.5rem 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--bg-card); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; background-color: #eee; }
+        .card-content { padding: 1.2rem; }
+        .card-title { font-size: 1.2rem; color: var(--dark); margin-bottom: 0.2rem; }
+        .card-title-jp { color: var(--gray); font-size: 0.85rem; margin-bottom: 0.8rem; }
+        .card-desc { color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem; height: 3.2em; overflow: hidden; }
+        .card-price { color: var(--primary); font-size: 1.4rem; font-weight: bold; }
+        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 3rem 2rem; margin-top: 5rem; }
+        .footer-logo { color: var(--accent); font-size: 2rem; font-weight: bold; margin-bottom: 1rem; display: block; text-decoration: none; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">絆 KIZUNA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="about.html">เกี่ยวกับเรา</a></li>
+                <li><a href="menu.html" class="active">เมนูอาหาร</a></li>
+                <li><a href="promotions.html">โปรโมชั่น</a></li>
+                <li><a href="gallery.html">บรรยากาศ</a></li>
+                <li><a href="reservation.html">จองโต๊ะ</a></li>
+                <li><a href="contact.html">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">🍜 ราเมง & ข้าวหน้าต่างๆ</h2>
+        <p class="section-subtitle">น้ำซุปเคี่ยวเข้มข้นสูตรดั้งเดิม และดงบุริวัตถุดิบพรีเมียมจัดเต็ม</p>
+
+        <!-- หมวดราเมง -->
+        <h3 class="menu-category-title">Ramen (ราเมงต้นตำรับ)</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="images (6).jpg" alt="Tonkotsu Special" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Tonkotsu Special Ramen</h4>
+                    <p class="card-title-jp">豚骨スペシャルラーメン</p>
+                    <p class="card-desc">ซุปกระดูกหมูเข้มข้น เคี่ยวนาน 12 ชม. หมูชาชูชิ้นโต ไข่ออนเซ็น</p>
+                    <p class="card-price">฿290</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="DSC06512.jpg" alt="Truffle Shoyu Ramen" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Truffle Shoyu Ramen</h4>
+                    <p class="card-title-jp">トリュフ醤油ラーメン</p>
+                    <p class="card-desc">ราเมงซุปโชยุใส หอมกลิ่นซอสทรัฟเฟิลดำแท้ ผสานรสชาติกลมกล่อม</p>
+                    <p class="card-price">฿360</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (7).jpg" alt="Spicy Miso Ramen" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Spicy Miso Ramen</h4>
+                    <p class="card-title-jp">辛味噌ラーメン</p>
+                    <p class="card-desc">ซุปเต้าเจี้ยวญี่ปุ่นรสเผ็ดจัดจ้าน หมูสับผัดซอส และหมูชาชูย่างเตาถ่าน</p>
+                    <p class="card-price">฿280</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="cb0ff49616dfc791c768f874fcda1972.jpg" alt="Tsukemen" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Special Tsukemen</h4>
+                    <p class="card-title-jp">つけ麺</p>
+                    <p class="card-desc">ราเมงเส้นหนานุ่ม จุ่มทานกับซุปกระดูกหมูผสมปลาแห้งรสเข้มข้นพิเศษ</p>
+                    <p class="card-price">฿320</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="9f500c_3681aa342e9a4509824ed6ef72732c1d~mv2.jpeg" alt="Black Garlic Ramen" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Black Garlic Tonkotsu</h4>
+                    <p class="card-title-jp">黒ニンニクラーメン</p>
+                    <p class="card-desc">ราเมงซุปกระดูกหมูผสมน้ำมันกระเทียมดำคั่ว หอมเข้มเข้ากันอย่างลงตัว</p>
+                    <p class="card-price">฿310</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="ebi-miso-ramen.jpg" alt="Ebi Miso Ramen" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Ebi Miso Ramen</h4>
+                    <p class="card-title-jp">海老味噌ラーメン</p>
+                    <p class="card-desc">ซุปมิโซะกุ้งเข้มข้น ท็อปด้วยกุ้งแม่น้ำย่างหอมๆ และหมูชาชู</p>
+                    <p class="card-price">฿380</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- หมวดข้าวหน้าต่างๆ -->
+        <h3 class="menu-category-title">Donburi (ข้าวหน้าต่างๆ)</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="pixta_37613851_M.jpg" alt="Unagi Don" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Unagi Don (ข้าวหน้าปลาไหล)</h4>
+                    <p class="card-title-jp">鰻重</p>
+                    <p class="card-desc">ปลาไหลญี่ปุ่นย่างเตาถ่าน หอมซอสสูตรลับ เสิร์ฟบนข้าวญี่ปุ่นร้อนๆ</p>
+                    <p class="card-price">฿650</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (8).jpg" alt="Wagyu A5 Foie Gras Don" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Wagyu A5 & Foie Gras Don</h4>
+                    <p class="card-title-jp">和牛フォアグラ丼</p>
+                    <p class="card-desc">ข้าวหน้าเนื้อวากิว A5 ลนไฟ พร้อมตับห่านราดซอสหวานและไข่ออนเซ็น</p>
+                    <p class="card-price">฿890</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="Salmon-Ikura-Don-7225-I-500x500.jpg" alt="Salmon Ikura Don" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Salmon Ikura Don</h4>
+                    <p class="card-title-jp">サーモンいくら丼</p>
+                    <p class="card-desc">ข้าวหน้าแซลมอนสดหั่นเต๋า ท็อปด้วยไข่ปลาแซลมอนล้นชาม</p>
+                    <p class="card-price">฿480</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images (9).jpg" alt="Gyu Don" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Gyu Don (ข้าวหน้าเนื้อ)</h4>
+                    <p class="card-title-jp">牛丼</p>
+                    <p class="card-desc">เนื้อวัวออสเตรเลียสไลซ์ นำไปต้มกับซอสโชยุและหัวหอมสไตล์ญี่ปุ่น</p>
+                    <p class="card-price">฿250</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="8Katsu-Don.jpg" alt="Katsu Don" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Katsu Don (ข้าวหน้าหมูทอด)</h4>
+                    <p class="card-title-jp">カツ丼</p>
+                    <p class="card-desc">หมูทอดทงคัตสึชิ้นหนา กรอบนอกนุ่มใน ราดไข่นุ่มซอสโชยุ</p>
+                    <p class="card-price">฿220</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="gg.jpg" alt="Tendon" class="card-img"> <!-- 👈 ใส่รูปตรงนี้ -->
+                <div class="card-content">
+                    <h4 class="card-title">Ebi Tendon (ข้าวหน้าเทมปุระ)</h4>
+                    <p class="card-title-jp">天丼</p>
+                    <p class="card-desc">กุ้งเทมปุระตัวโต 3 ตัว พร้อมผักรวมทอดกรอบ ราดซอสเทนซึยุ</p>
+                    <p class="card-price">฿280</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="index.html" class="footer-logo">絆 KIZUNA</a>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #ccc;">&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
