@@ -113,9 +113,41 @@
         /* --- Main Content --- */
         .container { 
             max-width: 1200px; 
-            margin: 3rem auto; 
+            margin: 2rem auto 3rem auto; 
             padding: 0 1.5rem; 
             flex: 1;
+        }
+
+        /* --- Back Button Styles --- */
+        .back-btn-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #ffffff;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateX(-3px);
         }
 
         .section-title { 
@@ -349,7 +381,7 @@
             text-decoration: none; 
         }
 
-        /* 📱 Responsive จัดระเบียบการแสดงผลบนมือถือโดยไม่ใช้ Hamburger */
+        /* 📱 Responsive จัดระเบียบการแสดงผลบนมือถือ */
         @media (max-width: 768px) { 
             nav {
                 flex-direction: column;
@@ -364,9 +396,19 @@
                 justify-content: flex-start;
             }
 
-            .container { margin: 2rem auto; }
+            .container { margin: 1rem auto 2rem auto; }
             .section-title { font-size: 1.8rem; }
             .menu-category-title { font-size: 1.4rem; }
+
+            /* ปรับแต่งปุ่มย้อนกลับสำหรับมือถือ */
+            .back-btn-container {
+                margin-bottom: 1rem;
+            }
+            
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -394,6 +436,13 @@
     </header>
 
     <main class="container">
+        <!-- ปุ่มย้อนกลับไปหน้าเมนูหลัก -->
+        <div class="back-btn-container">
+            <a href="menu.html" class="back-btn">
+                ❮ ย้อนกลับไปหน้าเมนูรวม
+            </a>
+        </div>
+
         <h2 class="section-title">🍜 ราเมง & ข้าวหน้าต่างๆ</h2>
         <p class="section-subtitle">น้ำซุปเคี่ยวเข้มข้นสูตรดั้งเดิม และดงบุริวัตถุดิบพรีเมียมจัดเต็ม</p>
 

@@ -113,9 +113,33 @@
         /* --- Main Content --- */
         .container { 
             max-width: 1200px; 
-            margin: 3rem auto; 
+            margin: 2rem auto 3rem auto; 
             padding: 0 1.5rem; 
             flex: 1;
+        }
+
+        /* ปุ่มย้อนกลับไปหน้าเมนูหลัก */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
         }
 
         .section-title { 
@@ -363,9 +387,15 @@
                 justify-content: flex-start;
             }
 
-            .container { margin: 2rem auto; }
+            .container { margin: 1.5rem auto; }
             .section-title { font-size: 1.8rem; }
             .menu-category-title { font-size: 1.4rem; }
+            
+            .back-btn {
+                margin-bottom: 1rem;
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
         }
     </style>
 </head>
@@ -393,6 +423,11 @@
     </header>
 
     <main class="container">
+        <!-- ปุ่มย้อนกลับไปหน้าเมนูหลัก -->
+        <a href="menu.html" class="back-btn">
+            ❮ ย้อนกลับไปหน้าเมนูรวม
+        </a>
+
         <h2 class="section-title">🍡 ของหวาน & เครื่องดื่ม</h2>
         <p class="section-subtitle">ปิดท้ายมื้ออร่อยด้วยขนมหวานสไตล์ญี่ปุ่นและเครื่องดื่มเย็นชื่นใจ</p>
 
