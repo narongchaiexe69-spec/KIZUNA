@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KIZUNA - ร้านอาหารญี่ปุ่นพรีเมียม</title>
 
-    <!-- รวม Style ทั้งหมดไว้ในไฟล์เดียว ไม่ต้องมี style.css -->
     <style>
         :root {
             --primary: #9e1b1b;
@@ -44,6 +43,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
+            position: relative;
         }
 
         .logo {
@@ -52,6 +52,33 @@
             font-weight: bold;
             text-decoration: none;
             letter-spacing: 2px;
+        }
+
+        /* ปุ่ม Hamburger สำหรับมือถือ */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        /* เอฟเฟกต์หมุนปุ่ม Hamburger เป็น X เมื่อเปิดเมนู */
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         .nav-links {
@@ -177,12 +204,53 @@
             font-size: 1.1rem;
         }
 
-        /* Responsive Navbar for Mobile */
-        @media (max-width: 768px) {
+        /* Responsive สำหรับมือถือ (หน้าจอเล็กกว่า 768px) */
+        @media screen and (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1.5rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+                text-align: center;
+                gap: 1.2rem;
             }
-            .hero h1 { font-size: 2rem; }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .hero h1 { 
+                font-size: 1.8rem; 
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                margin: 2rem auto;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -192,7 +260,15 @@
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
-            <ul class="nav-links">
+            
+            <!-- ปุ่ม Hamburger เมนูสำหรับมือถือ -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html" class="active">หน้าแรก</a></li>
                 <li><a href="about.html">เกี่ยวกับเรา</a></li>
                 <li><a href="menu.html">เมนูอาหาร</a></li>
@@ -245,15 +321,22 @@
         </div>
     </footer>
 
-    <!-- Script นับคนดูเริ่มจาก 0 แท้จริง -->
     <script>
+        // JS สำหรับเปิด-ปิด เมนูในมือถือ
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Script นับคนดู
         async function updateVisitorCount() {
             const countElement = document.getElementById('count');
             
             try {
-                // 1. ดึงข้อมูลจาก API (เริ่มต้นที่ 1 หากเป็นการสร้าง counter ใหม่ครั้งแรก)
                 const response = await fetch('https://api.counterapi.dev/v1/kizuna_real_counter_zero/visits/up');
-                
                 if (!response.ok) throw new Error('API Request Failed');
                 
                 const data = await response.json();
@@ -265,14 +348,11 @@
                 console.warn('API Blocked or Offline, falling back to Local Storage.');
             }
 
-            // 2. สำรองสำหรับรันเปิดไฟล์ในเครื่อง (file:///)
-            // ตั้งชื่อ Key ใหม่เป็น kizuna_visits_from_zero เพื่อล้างค่าเก่าที่เคยเซฟไว้
             let localCount = localStorage.getItem('kizuna_visits_from_zero');
-            
             if (!localCount) {
-                localCount = 1; // ครั้งแรกที่เปิดเว็บ จะเริ่มนับเป็นคนที่ 1 ทันที
+                localCount = 1;
             } else {
-                localCount = parseInt(localCount) + 1; // เปิดครั้งถัดไปเพิ่มทีละ 1
+                localCount = parseInt(localCount) + 1;
             }
             
             localStorage.setItem('kizuna_visits_from_zero', localCount);
