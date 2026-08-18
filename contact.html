@@ -5,20 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ติดต่อเรา - KIZUNA</title>
     <style>
-        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --white: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); display: flex; flex-direction: column; min-height: 100vh; }
-        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; }
-        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; }
-        .nav-links a.active { color: var(--accent); }
-        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; flex: 1; }
-        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .contact-card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #eee; text-align: center; }
-        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 2rem; margin-top: auto; }
+        :root { 
+            --primary: #9e1b1b; 
+            --dark: #121212; 
+            --light: #faf8f5; 
+            --accent: #d4af37; 
+            --gray: #666;
+            --white: #ffffff; 
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Sukhumvit Set', 'Kanit', 'Helvetica Neue', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--light); 
+            color: var(--dark); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        /* --- Header & Navigation --- */
+        header { 
+            background-color: var(--dark); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+        }
+
+        nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+        }
+
+        .logo { 
+            color: var(--accent); 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            text-decoration: none; 
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 1.2rem; 
+            align-items: center;
+        }
+
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--accent); 
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* --- Main Content --- */
+        .container { 
+            max-width: 1200px; 
+            margin: 3rem auto 4rem auto; 
+            padding: 0 1.5rem; 
+            flex: 1; 
+        }
+
+        .section-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            color: var(--primary); 
+            margin-bottom: 0.5rem; 
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- Grid & Contact Cards --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+            margin-bottom: 3rem;
+        }
+
+        .contact-card { 
+            background: var(--white); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06); 
+            border: 1px solid #eee; 
+            text-align: center; 
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-card p, .contact-card a {
+            color: var(--gray);
+            font-size: 0.95rem;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+        }
+
+        /* --- Map & Form Section --- */
+        .content-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .map-container, .form-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+
+        .form-container h3, .map-container h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #7a1414;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 320px;
+            border: 0;
+            border-radius: 8px;
+        }
+
+        footer { 
+            background-color: var(--dark); 
+            color: #fff; 
+            text-align: center; 
+            padding: 2rem; 
+            margin-top: auto; 
+        }
+
+        /* 📱 Responsive สำหรับสมาร์ตโฟน */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                overflow-x: auto;
+                width: 100%;
+                justify-content: flex-start;
+                padding-bottom: 0.3rem;
+            }
+
+            .container {
+                margin: 2rem auto;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -39,20 +264,57 @@
 
     <main class="container">
         <h2 class="section-title">ติดต่อเรา</h2>
+        <p class="section-subtitle">สอบถามข้อมูลเพิ่มเติม สั่งซื้ออาหาร หรือเยี่ยมชมร้านอาหารญี่ปุ่น KIZUNA</p>
+
         <div class="grid">
             <div class="contact-card">
-                <h3>📍 ที่อยู่</h3>
-                <!-- แก้ไขที่อยู่เป็นเชียงใหม่ให้ถูกต้องเรียบร้อยครับ -->
-                <p style="margin-top:0.5rem;">12/3 ถนนนิมมานเหมินท์ ซอย 9<br>ต.สุเทพ อ.เมือง จ.เชียงใหม่ 50200</p>
+                <h3>📍 ที่อยู่ร้าน</h3>
+                <p>12/3 ถนนนิมมานเหมินท์ ซอย 9<br>ต.สุเทพ อ.เมือง จ.เชียงใหม่ 50200</p>
             </div>
             <div class="contact-card">
                 <h3>⏰ เวลาเปิด-ปิด</h3>
-                <p style="margin-top:0.5rem;">เปิดทุกวัน<br>11:30 - 22:30 น.</p>
+                <p>เปิดบริการทุกวัน<br>11:30 - 22:30 น.</p>
             </div>
             <div class="contact-card">
                 <h3>📞 ช่องทางติดต่อ</h3>
-                <!-- ปรับเบอร์โทรเป็นรหัสรหัสพื้นที่เชียงใหม่ (012) ให้สมบูรณ์ -->
-                <p style="margin-top:0.5rem;">โทร: 012-345-6789<br>LINE: @kizunath</p>
+                <p>
+                    โทรศัพท์: <a href="tel:053123456">053-123-456</a><br>
+                    มือถือ: <a href="tel:0812345678">081-234-5678</a><br>
+                    LINE: <a href="https://line.me" target="_blank">@kizunath</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <!-- ฟอร์มส่งข้อความ -->
+            <div class="form-container">
+                <h3>✉️ ส่งข้อความถึงเรา</h3>
+                <form onsubmit="event.preventDefault(); alert('ขอบคุณสำหรับข้อความ ทางร้านจะติดต่อกลับโดยเร็วที่สุดครับ'); this.reset();">
+                    <div class="form-group">
+                        <label for="name">ชื่อ-นามสกุล</label>
+                        <input type="text" id="name" required placeholder="กรุณากรอกชื่อของคุณ">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">เบอร์โทรศัพท์</label>
+                        <input type="tel" id="phone" required placeholder="08X-XXX-XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ข้อความ / สอบถามเพิ่มเติม</label>
+                        <textarea id="message" rows="4" required placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">ส่งข้อความ</button>
+                </form>
+            </div>
+
+            <!-- แผนที่ Google Maps -->
+            <div class="map-container">
+                <h3>🗺️ แผนที่ร้าน KIZUNA</h3>
+                <iframe 
+                    class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3777.208182283286!2d98.96621217594537!3d18.79774648235282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a8123a6699d%3A0x6b1db9d2595d2c88!2sNimmanahaeminda%20Rd%2C%20Mueang%20Chiang%20Mai%20District%2C%20Chiang%20Mai!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
     </main>
@@ -61,4 +323,4 @@
         <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
     </footer>
 </body>
-</html>
+</html>s

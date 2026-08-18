@@ -2,31 +2,202 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>เมนูอาหาร - KIZUNA</title>
+    
     <style>
-        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --white: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
-        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; flex: 1; }
-        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s; text-align: center; padding: 2.5rem; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .btn { display: inline-block; background-color: var(--primary); color: #fff; padding: 0.8rem 2rem; text-decoration: none; border-radius: 25px; font-weight: bold; margin-top: 1rem; }
-        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 2rem; margin-top: auto; }
+        :root { 
+            --primary: #9e1b1b; 
+            --dark: #121212; 
+            --light: #faf8f5; 
+            --accent: #d4af37; 
+            --gray: #666; 
+            --white: #ffffff; 
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+        }
+
+        body { 
+            background-color: var(--light); 
+            color: var(--dark); 
+            line-height: 1.6; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        header { 
+            background-color: var(--dark); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+        }
+
+        nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+            position: relative;
+        }
+
+        .logo { 
+            color: var(--accent); 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            text-decoration: none; 
+            letter-spacing: 2px; 
+        }
+
+        /* ปุ่ม Hamburger สำหรับมือถือ */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent);
+            transition: 0.3s;
+        }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 1.2rem; 
+        }
+
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: color 0.3s; 
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--accent); 
+        }
+
+        .container { 
+            max-width: 1200px; 
+            margin: 2rem auto 4rem auto; 
+            padding: 0 1.5rem; 
+            flex: 1; 
+        }
+
+        .section-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            color: var(--primary); 
+            margin-bottom: 3rem; 
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .card { 
+            background: var(--white); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            text-align: center; 
+            padding: 2.5rem; 
+            border: 1px solid #eee; 
+        }
+
+        .card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+        }
+
+        .btn { 
+            display: inline-block; 
+            background-color: var(--primary); 
+            color: #fff; 
+            padding: 0.8rem 2rem; 
+            text-decoration: none; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            margin-top: 1rem; 
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #7a1414;
+        }
+
+        footer { 
+            background-color: var(--dark); 
+            color: #fff; 
+            text-align: center; 
+            padding: 2rem; 
+            margin-top: auto; 
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+                text-align: center;
+                gap: 1rem;
+            } 
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
+
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
-            <ul class="nav-links">
+
+            <!-- ปุ่มกดเปิดเมนูมือถือ -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="about.html">เกี่ยวกับเรา</a></li>
                 <li><a href="menu.html" class="active">เมนู</a></li>
@@ -62,6 +233,18 @@
         </div>
     </main>
 
-    <footer><p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p></footer>
+    <footer>
+        <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // สคริปต์เปิด-ปิดเมนูบนมือถือ
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

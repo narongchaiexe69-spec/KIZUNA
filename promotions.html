@@ -2,21 +2,229 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>โปรโมชั่น - KIZUNA</title>
     <style>
-        :root { --primary: #9e1b1b; --dark: #121212; --light: #faf8f5; --accent: #d4af37; --gray: #666; --white: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { background-color: var(--light); color: var(--dark); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background-color: var(--dark); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { color: var(--accent); font-size: 1.8rem; font-weight: bold; text-decoration: none; letter-spacing: 2px; }
-        .nav-links { display: flex; list-style: none; gap: 1.2rem; }
-        .nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; }
-        .nav-links a.active { color: var(--accent); }
-        .container { max-width: 1200px; margin: 2rem auto 4rem auto; padding: 0 1.5rem; flex: 1; }
-        .section-title { text-align: center; font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; }
-        .promo-card { background: var(--white); padding: 2rem; border-radius: 12px; border-left: 6px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; }
-        footer { background-color: var(--dark); color: #fff; text-align: center; padding: 2rem; margin-top: auto; }
+        :root { 
+            --primary: #9e1b1b; 
+            --dark: #121212; 
+            --light: #faf8f5; 
+            --accent: #d4af37; 
+            --gray: #666; 
+            --white: #ffffff; 
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Sukhumvit Set', 'Kanit', 'Helvetica Neue', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--light); 
+            color: var(--dark); 
+            line-height: 1.6; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        /* --- Header & Navigation --- */
+        header { 
+            background-color: var(--dark); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+        }
+
+        nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 2rem; 
+        }
+
+        .logo { 
+            color: var(--accent); 
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            text-decoration: none; 
+            letter-spacing: 2px; 
+            white-space: nowrap;
+        }
+
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 1.2rem; 
+            align-items: center;
+        }
+
+        .nav-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 0.95rem; 
+            transition: 0.3s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--accent); 
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* --- Main Content --- */
+        .container { 
+            max-width: 1200px; 
+            margin: 3rem auto 4rem auto; 
+            padding: 0 1.5rem; 
+            flex: 1; 
+        }
+
+        .section-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            color: var(--primary); 
+            margin-bottom: 0.5rem; 
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- Promo Grid Layout --- */
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .promo-card { 
+            background: var(--white); 
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06); 
+            border: 1px solid #eee;
+            border-left: 6px solid var(--primary); 
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .promo-badge {
+            background-color: var(--accent);
+            color: var(--dark);
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            align-self: flex-start;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .promo-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .promo-title {
+            color: var(--primary); 
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .promo-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .promo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+            gap: 1rem;
+        }
+
+        .btn-reserve {
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .btn-reserve:hover {
+            background-color: #7a1414;
+        }
+
+        .btn-terms {
+            color: var(--gray);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+
+        footer { 
+            background-color: var(--dark); 
+            color: #fff; 
+            text-align: center; 
+            padding: 2rem; 
+            margin-top: auto; 
+        }
+
+        /* 📱 Responsive สำหรับสมาร์ตโฟน */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                overflow-x: auto;
+                width: 100%;
+                justify-content: flex-start;
+                padding-bottom: 0.3rem;
+            }
+
+            .container {
+                margin: 2rem auto;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .promo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -34,17 +242,55 @@
             </ul>
         </nav>
     </header>
+
     <main class="container">
-        <h2 class="section-title">โปรโมชั่นพิเศษ</h2>
-        <div class="promo-card">
-            <h3 style="color: var(--primary); font-size: 1.6rem;">🔥 มา 4 จ่าย 3 บุฟเฟต์แซลมอน</h3>
-            <p style="margin-top: 0.5rem; color: var(--gray);">เฉพาะวันจันทร์ - พฤหัสบดี เวลา 11:00 - 16:00 น.</p>
-        </div>
-        <div class="promo-card">
-            <h3 style="color: var(--primary); font-size: 1.6rem;">🎉 ฉลองวันเกิด รับส่วนลด 15%</h3>
-            <p style="margin-top: 0.5rem; color: var(--gray);">เพียงแสดงบัตรประชาชน รับส่วนลดค่าอาหารทันที (ตลอดเดือนเกิด)</p>
+        <h2 class="section-title">🎁 โปรโมชั่นพิเศษ</h2>
+        <p class="section-subtitle">ข้อเสนอสุดคุ้มเพื่อยกระดับมื้ออาหารญี่ปุ่นของคุณที่ KIZUNA</p>
+
+        <div class="promo-grid">
+            <!-- โปรโมชั่น 1 -->
+            <div class="promo-card">
+                <div class="promo-content">
+                    <span class="promo-badge">สุดคุ้มต้อนรับวันธรรมดา</span>
+                    <h3 class="promo-title">🔥 มา 4 จ่าย 3 บุฟเฟต์แซลมอน</h3>
+                    <p class="promo-desc">อิ่มอร่อยกับบุฟเฟต์แซลมอนพรีเมียม สด ใหม่ ส่งตรงจากนอร์เวย์ เฉพาะวันจันทร์ - พฤหัสบดี เวลา 11:00 - 16:00 น.</p>
+                    <div class="promo-footer">
+                        <button class="btn-terms" onclick="alert('เงื่อนไข: สิทธิ์นี้สำหรับการรับประทานราคาปกติ ไม่สามารถใช้ร่วมกับคูปองส่วนลดอื่นได้')">เงื่อนไขเพิ่มเติม</button>
+                        <a href="reservation.html" class="btn-reserve">จองโต๊ะทันที</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- โปรโมชั่น 2 -->
+            <div class="promo-card">
+                <div class="promo-content">
+                    <span class="promo-badge">สิทธิพิเศษเดือนเกิด</span>
+                    <h3 class="promo-title">🎉 ฉลองวันเกิด รับส่วนลด 15%</h3>
+                    <p class="promo-desc">ฉลองช่วงเวลาพิเศษของคุณ เพียงแสดงบัตรประชาชน รับส่วนลดค่าอาหารทันที (รับสิทธิ์ได้ตลอดเดือนเกิด)</p>
+                    <div class="promo-footer">
+                        <button class="btn-terms" onclick="alert('เงื่อนไข: ส่วนลดเฉพาะค่าอาหาร A La Carte และต้องแสดงบัตรประชาชนก่อนชำระเงิน')">เงื่อนไขเพิ่มเติม</button>
+                        <a href="reservation.html" class="btn-reserve">จองโต๊ะทันที</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- โปรโมชั่น 3 (เพิ่มเติม) -->
+            <div class="promo-card">
+                <div class="promo-content">
+                    <span class="promo-badge">สมาชิก KIZUNA Member</span>
+                    <h3 class="promo-title">🍶 ชาเขียวรีฟิล & ไอศกรีม ฟรี!</h3>
+                    <p class="promo-desc">รับฟรีชาเขียวรีฟิลและพรีเมียมมัทฉะไอศกรีม 1 สกู๊ป เมื่อมียอดใช้จ่ายครบ 1,500 บาทขึ้นไป</p>
+                    <div class="promo-footer">
+                        <button class="btn-terms" onclick="alert('เงื่อนไข: จำกัด 1 สิทธิ์ต่อ 1 โต๊ะ และต้องเป็นสมาชิกของทางร้าน')">เงื่อนไขเพิ่มเติม</button>
+                        <a href="reservation.html" class="btn-reserve">จองโต๊ะทันที</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
-    <footer><p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p></footer>
+
+    <footer>
+        <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
+    </footer>
 </body>
-</html>
+</html>s
