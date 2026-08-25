@@ -258,12 +258,12 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="fullname">ชื่อ - นามสกุล *</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="เช่น คุณสมชาย ใจดี" required>
+                        <input type="text" id="fullname" name="fullname" placeholder="กรุณากรอกชื่อของท่าน" required>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">เบอร์โทรศัพท์ *</label>
-                        <input type="tel" id="phone" name="phone" placeholder="เช่น 081-234-5678" required>
+                        <input type="tel" id="phone" name="phone" placeholder="กรุณากรอกเบอร์โทรศัพท์ของท่าน" required>
                     </div>
 
                     <div class="form-group">
@@ -326,6 +326,12 @@
         <p style="font-size: 0.9rem; color: #ccc;">&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
     </footer>
 
+    <!-- เครื่องเล่นเพลงพื้นหลังแบบเล่นอัตโนมัติและซ่อนไว้ -->
+    <audio id="bg-music" autoplay loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        เบราว์เซอร์ของคุณไม่รองรับการเล่นไฟล์เสียง
+    </audio>
+
     <script>
         // กำหนดให้เลือกระบุวันที่ได้ตั้งแต่วันปัจจุบันเป็นต้นไป (ป้องกันเลือกวันย้อนหลัง)
         const dateInput = document.getElementById('date');
@@ -344,6 +350,28 @@
             alert(`ขอบคุณครับคุณ ${name}!\n\nทางร้านได้รับการขอจองโต๊ะสำหรับ ${guests} ท่าน ในวันที่ ${date} เวลา ${time} น. เรียบร้อยแล้ว\nเจ้าหน้าที่จะติดต่อกลับผ่านเบอร์โทรศัพท์เพื่อยืนยันการจองอีกครั้งครับ`);
             
             this.reset();
+        });
+
+        // --- สคริปต์ควบคุมการเล่นเพลงอัตโนมัติ ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            audio.volume = 0.3; // ปรับความดังของเพลง (0.0 ถึง 1.0)
+
+            // พยายามสั่งเล่นเพลงทันที
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // หากเบราว์เซอร์บล็อก Autoplay ไว้ เพลงจะเริ่มเล่นทันทีเมื่อมีการแตะหรือคลิกบนหน้าจอครั้งแรก
+                    const enableAudio = () => {
+                        audio.play();
+                        document.removeEventListener('click', enableAudio);
+                        document.removeEventListener('touchstart', enableAudio);
+                    };
+                    document.addEventListener('click', enableAudio);
+                    document.addEventListener('touchstart', enableAudio);
+                });
+            }
         });
     </script>
 </body>

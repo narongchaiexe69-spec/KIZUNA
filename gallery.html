@@ -318,6 +318,12 @@
         <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
     </footer>
 
+    <!-- เครื่องเล่นเพลงพื้นหลังแบบเล่นอัตโนมัติและซ่อนไว้ -->
+    <audio id="bg-music" autoplay loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        เบราว์เซอร์ของคุณไม่รองรับการเล่นไฟล์เสียง
+    </audio>
+
     <script>
         const galleryData = [
             { src: '9.-Jidori-Cuisine-Ken-4.jpg', caption: '📷 โซนเคาน์เตอร์บาร์' },
@@ -367,6 +373,28 @@
                 if (e.key === 'Escape') closeLightbox();
                 if (e.key === 'ArrowLeft') changeImage(-1);
                 if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // --- สคริปต์ควบคุมการเล่นเพลงอัตโนมัติ ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            audio.volume = 0.3; // ปรับความดังของเพลง (0.0 ถึง 1.0)
+
+            // พยายามสั่งเล่นเพลงทันที
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // หากเบราว์เซอร์บล็อก Autoplay ไว้ เพลงจะเริ่มเล่นทันทีเมื่อมีการแตะหรือคลิกบนหน้าจอครั้งแรก
+                    const enableAudio = () => {
+                        audio.play();
+                        document.removeEventListener('click', enableAudio);
+                        document.removeEventListener('touchstart', enableAudio);
+                    };
+                    document.addEventListener('click', enableAudio);
+                    document.addEventListener('touchstart', enableAudio);
+                });
             }
         });
     </script>

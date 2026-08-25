@@ -176,32 +176,13 @@
             background-color: #7a1414;
         }
 
-        /* Footer & Visitor Counter */
+        /* Footer */
         footer {
             background-color: var(--dark);
             color: #fff;
             text-align: center;
             padding: 2rem;
             margin-top: 5rem;
-        }
-
-        .visitor-counter {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #ccc;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .visitor-counter #count {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.1rem;
         }
 
         /* Responsive สำหรับมือถือ (หน้าจอเล็กกว่า 768px) */
@@ -255,6 +236,13 @@
     </style>
 </head>
 <body>
+
+    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น (พร้อมไฟล์เพลง background) -->
+    <audio id="bg-music" loop style="display: none;">
+        <!-- ใช้ไฟล์เพลงบรรลัยญี่ปุ่นจากภายนอก หรือเปลี่ยนเป็น "bgm.mp3" หากมีไฟล์ในโฟลเดอร์ -->
+        <source src="sss.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- แถบเมนูส่วนหัว -->
     <header>
@@ -314,11 +302,6 @@
 
     <footer>
         <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
-        
-        <!-- ส่วนแสดงจำนวนคนดูเว็บ -->
-        <div class="visitor-counter">
-            👁️ จำนวนผู้เข้าชมเว็บไซต์: <span id="count">0</span> คน
-        </div>
     </footer>
 
     <script>
@@ -331,35 +314,32 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // Script นับคนดู
-        async function updateVisitorCount() {
-            const countElement = document.getElementById('count');
-            
-            try {
-                const response = await fetch('https://api.counterapi.dev/v1/kizuna_real_counter_zero/visits/up');
-                if (!response.ok) throw new Error('API Request Failed');
-                
-                const data = await response.json();
-                if (data && data.count) {
-                    countElement.innerText = data.count.toLocaleString();
-                    return;
-                }
-            } catch (error) {
-                console.warn('API Blocked or Offline, falling back to Local Storage.');
-            }
+        // 🎵 ระบบสั่งเล่นเพลงพื้นหลัง
+        const audio = document.getElementById('bg-music');
 
-            let localCount = localStorage.getItem('kizuna_visits_from_zero');
-            if (!localCount) {
-                localCount = 1;
-            } else {
-                localCount = parseInt(localCount) + 1;
-            }
-            
-            localStorage.setItem('kizuna_visits_from_zero', localCount);
-            countElement.innerText = localCount.toLocaleString();
+        function playAudio() {
+            audio.play().then(() => {
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('scroll', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+            }).catch(error => {
+                console.log("Autoplay blocked:", error);
+            });
         }
 
-        updateVisitorCount();
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.volume = 0.3; // ปรับระดับความดังไว้ที่ 30%
+            let promise = audio.play();
+            
+            if (promise !== undefined) {
+                promise.catch(() => {
+                    // หากโดนเบราว์เซอร์บล็อกการเล่นอัตโนมัติ จะเล่นทันทีเมื่อขยับ/แตะหน้าจอครั้งแรก
+                    document.addEventListener('click', playAudio);
+                    document.addEventListener('scroll', playAudio);
+                    document.addEventListener('touchstart', playAudio);
+                });
+            }
+        });
     </script>
 
 </body>

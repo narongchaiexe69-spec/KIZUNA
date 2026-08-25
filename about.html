@@ -116,6 +116,22 @@
             border: 1px solid #eee; 
         }
 
+        /* 🎬 สไตล์สำหรับกรอบใส่ตัวเล่นวิดีโอ */
+        .video-container {
+            width: 100%;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
         footer { 
             background-color: var(--dark); 
             color: #fff; 
@@ -165,6 +181,12 @@
 </head>
 <body>
 
+    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
@@ -193,7 +215,17 @@
 
     <main class="container">
         <h2 class="section-title">เรื่องราวของ KIZUNA</h2>
+        
         <div class="about-content">
+            <!-- 🎬 วิดีโอ MP4 เกี่ยวกับร้าน -->
+            <div class="video-container">
+                <video id="promo-video" controls playsinline poster="video-poster.jpg">
+                    <source src="as.mp4" type="video/mp4">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-chef-preparing-sushi-41434-large.mp4" type="video/mp4">
+                    เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้
+                </video>
+            </div>
+
             <p style="font-size: 1.1rem; line-height: 2; margin-bottom: 1.5rem;">
                 คำว่า "KIZUNA" (絆) ในภาษาญี่ปุ่นหมายถึง "สายสัมพันธ์" ร้านของเราตั้งใจสร้างสรรค์อาหารทุกจานเพื่อเชื่อมโยงความสุขระหว่างคุณและคนที่คุณรัก ผ่านศิลปะการทำอาหารญี่ปุ่นแบบดั้งเดิม
             </p>
@@ -214,6 +246,57 @@
 
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+        });
+
+        // 🎵 ระบบเล่นเพลงบรรยากาศซ่อนตัวเล่น
+        const audio = document.getElementById('bg-music');
+        const promoVideo = document.getElementById('promo-video');
+
+        function playAudio() {
+            // เล่นเพลงบรรยากาศต่อเมื่อวิดีโอถูกหยุดพักอยู่เท่านั้น
+            if (promoVideo.paused) {
+                audio.play().then(() => {
+                    removeAudioListeners();
+                }).catch(error => {
+                    console.log("Autoplay blocked:", error);
+                });
+            }
+        }
+
+        function removeAudioListeners() {
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('scroll', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.volume = 0.3;
+            let promise = audio.play();
+            
+            if (promise !== undefined) {
+                promise.catch(() => {
+                    document.addEventListener('click', playAudio);
+                    document.addEventListener('scroll', playAudio);
+                    document.addEventListener('touchstart', playAudio);
+                });
+            }
+        });
+
+        // 🎬 ระบบจัดการสลับเสียงระหว่าง วิดีโอ และ เพลงบรรยากาศ
+        promoVideo.addEventListener('play', () => {
+            // เมื่อกดเล่นวิดีโอ -> หยุดเพลงบรรยากาศทันที
+            audio.pause();
+            removeAudioListeners();
+        });
+
+        promoVideo.addEventListener('pause', () => {
+            // เมื่อกดหยุดวิดีโอ -> เล่นเพลงบรรยากาศต่อ
+            audio.play().catch(err => console.log(err));
+        });
+
+        promoVideo.addEventListener('ended', () => {
+            // เมื่อวิดีโอเล่นจบ -> เล่นเพลงบรรยากาศต่อ
+            audio.play().catch(err => console.log(err));
         });
     </script>
 </body>

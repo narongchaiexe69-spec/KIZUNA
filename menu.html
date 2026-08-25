@@ -186,6 +186,12 @@
 </head>
 <body>
 
+    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
@@ -244,6 +250,32 @@
 
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+        });
+
+        // 🎵 ระบบเล่นเพลงบรรยากาศซ่อนตัวเล่น
+        const audio = document.getElementById('bg-music');
+
+        function playAudio() {
+            audio.play().then(() => {
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('scroll', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+            }).catch(error => {
+                console.log("Autoplay blocked:", error);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.volume = 0.3;
+            let promise = audio.play();
+            
+            if (promise !== undefined) {
+                promise.catch(() => {
+                    document.addEventListener('click', playAudio);
+                    document.addEventListener('scroll', playAudio);
+                    document.addEventListener('touchstart', playAudio);
+                });
+            }
         });
     </script>
 </body>
