@@ -19,7 +19,7 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
         }
 
         body { 
@@ -248,11 +248,22 @@
             navLinks.classList.toggle('active');
         });
 
-        // 🎵 ระบบเล่นเพลงบรรยากาศซ่อนตัวเล่น
+        // 🎵 ระบบจัดการเพลงเล่นต่อเนื่องข้ามหน้าด้วย sessionStorage
         const audio = document.getElementById('bg-music');
         const promoVideo = document.getElementById('promo-video');
 
+        // บันทึกเวลาเล่นเพลง
+        audio.addEventListener('timeupdate', () => {
+            sessionStorage.setItem('bgm_time', audio.currentTime);
+        });
+
         function playAudio() {
+            // ดึงเวลาเดิมที่เล่นค้างไว้
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime && audio.currentTime === 0) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
             // เล่นเพลงบรรยากาศต่อเมื่อวิดีโอถูกหยุดพักอยู่เท่านั้น
             if (promoVideo.paused) {
                 audio.play().then(() => {
@@ -271,8 +282,13 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             audio.volume = 0.3;
+
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
             let promise = audio.play();
-            
             if (promise !== undefined) {
                 promise.catch(() => {
                     document.addEventListener('click', playAudio);
@@ -284,18 +300,15 @@
 
         // 🎬 ระบบจัดการสลับเสียงระหว่าง วิดีโอ และ เพลงบรรยากาศ
         promoVideo.addEventListener('play', () => {
-            // เมื่อกดเล่นวิดีโอ -> หยุดเพลงบรรยากาศทันที
             audio.pause();
             removeAudioListeners();
         });
 
         promoVideo.addEventListener('pause', () => {
-            // เมื่อกดหยุดวิดีโอ -> เล่นเพลงบรรยากาศต่อ
             audio.play().catch(err => console.log(err));
         });
 
         promoVideo.addEventListener('ended', () => {
-            // เมื่อวิดีโอเล่นจบ -> เล่นเพลงบรรยากาศต่อ
             audio.play().catch(err => console.log(err));
         });
     </script>

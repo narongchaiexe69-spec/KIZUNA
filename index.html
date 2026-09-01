@@ -185,7 +185,7 @@
             margin-top: 5rem;
         }
 
-        /* Responsive สำหรับมือถือ (หน้าจอเล็กกว่า 768px) */
+        /* Responsive สำหรับมือถือ */
         @media screen and (max-width: 768px) {
             nav {
                 padding: 1rem;
@@ -237,9 +237,8 @@
 </head>
 <body>
 
-    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น (พร้อมไฟล์เพลง background) -->
+    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น -->
     <audio id="bg-music" loop style="display: none;">
-        <!-- ใช้ไฟล์เพลงบรรลัยญี่ปุ่นจากภายนอก หรือเปลี่ยนเป็น "bgm.mp3" หากมีไฟล์ในโฟลเดอร์ -->
         <source src="sss.mp3" type="audio/mpeg">
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
@@ -249,7 +248,6 @@
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
             
-            <!-- ปุ่ม Hamburger เมนูสำหรับมือถือ -->
             <div class="menu-toggle" id="mobile-menu">
                 <span></span>
                 <span></span>
@@ -314,26 +312,48 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // 🎵 ระบบสั่งเล่นเพลงพื้นหลัง
+        // 🎵 ระบบจัดการเพลงเล่นต่อเนื่องข้ามหน้าด้วย sessionStorage
         const audio = document.getElementById('bg-music');
 
+        // บันทึกเวลาเล่นเพลงทุกๆ 0.5 วินาที
+        audio.addEventListener('timeupdate', () => {
+            sessionStorage.setItem('bgm_time', audio.currentTime);
+        });
+
+        // ฟังก์ชันสั่งเล่นเพลง
         function playAudio() {
+            // ดึงเวลาเดิมที่เคยเล่นค้างไว้
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime && audio.currentTime === 0) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
             audio.play().then(() => {
-                document.removeEventListener('click', playAudio);
-                document.removeEventListener('scroll', playAudio);
-                document.removeEventListener('touchstart', playAudio);
+                removePlayListeners();
             }).catch(error => {
                 console.log("Autoplay blocked:", error);
             });
         }
 
+        function removePlayListeners() {
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('scroll', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
-            audio.volume = 0.3; // ปรับระดับความดังไว้ที่ 30%
+            audio.volume = 0.3; // ระดับความดัง 30%
+
+            // กำหนดเวลาเริ่มต้นหากเคยเปิดหน้าเว็บไว้ก่อนแล้ว
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
             let promise = audio.play();
-            
             if (promise !== undefined) {
                 promise.catch(() => {
-                    // หากโดนเบราว์เซอร์บล็อกการเล่นอัตโนมัติ จะเล่นทันทีเมื่อขยับ/แตะหน้าจอครั้งแรก
+                    // หากโดนเบราว์เซอร์บล็อก ให้กดหรือแตะหน้าจอครั้งแรกเพื่อเล่นต่อ
                     document.addEventListener('click', playAudio);
                     document.addEventListener('scroll', playAudio);
                     document.addEventListener('touchstart', playAudio);

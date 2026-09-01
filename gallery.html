@@ -46,6 +46,7 @@
             justify-content: space-between; 
             align-items: center; 
             padding: 1rem 2rem; 
+            position: relative;
         }
 
         .logo { 
@@ -53,8 +54,41 @@
             font-size: 1.8rem; 
             font-weight: bold; 
             text-decoration: none; 
-            letter-spacing: 2px;
+            letter-spacing: 2px; 
             white-space: nowrap;
+            z-index: 1002;
+        }
+
+        /* ปุ่ม Hamburger สำหรับมือถือ */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         .nav-links { 
@@ -228,16 +262,34 @@
         /* 📱 Responsive สำหรับสมาร์ตโฟน */
         @media (max-width: 768px) {
             nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
+                padding: 0.8rem 1.2rem;
             }
 
-            .nav-links {
-                overflow-x: auto;
-                width: 100%;
-                justify-content: flex-start;
-                padding-bottom: 0.3rem;
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links { 
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                gap: 1.5rem;
+                transition: 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+                z-index: 1001;
+            } 
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
             }
 
             .container {
@@ -259,13 +311,31 @@
     </style>
 </head>
 <body>
+
+    <!-- 🎵 เครื่องเล่นเพลงแบบซ่อนตัวเล่น -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
-            <ul class="nav-links">
+
+            <!-- ปุ่มเปิดเมนูบนมือถือ -->
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="about.html">เกี่ยวกับเรา</a></li>
-                <li><a href="menu.html">เมนู</a></li>
+                <li><a href="menu.html">เมนูอาหาร</a></li>
+                <li><a href="sushi.html">ซูชิ&ซาชิมิ</a></li>
+                <li><a href="ramen.html">ราเมง&ข้าว</a></li>
+                <li><a href="desserts.html">ของหวาน</a></li>
                 <li><a href="promotions.html">โปรโมชั่น</a></li>
                 <li><a href="gallery.html" class="active">บรรยากาศ</a></li>
                 <li><a href="reservation.html">จองโต๊ะ</a></li>
@@ -276,7 +346,7 @@
 
     <main class="container">
         <h2 class="section-title">บรรยากาศร้าน KIZUNA</h2>
-        <p class="section-subtitle">สัมผัสกลิ่นอายความอบอุ่นและการตกแต่งสไตล์ญี่ปุ่นข้นแท้</p>
+        <p class="section-subtitle">สัมผัสกลิ่นอายความอบอุ่นและการตกแต่งสไตล์ญี่ปุ่นดั้งเดิม</p>
 
         <div class="gallery-grid">
             <!-- รูปที่ 1 -->
@@ -318,13 +388,24 @@
         <p>&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
     </footer>
 
-    <!-- เครื่องเล่นเพลงพื้นหลังแบบเล่นอัตโนมัติและซ่อนไว้ -->
-    <audio id="bg-music" autoplay loop style="display: none;">
-        <source src="sss.mp3" type="audio/mpeg">
-        เบราว์เซอร์ของคุณไม่รองรับการเล่นไฟล์เสียง
-    </audio>
-
     <script>
+        // สคริปต์เปิด-ปิดเมนูมือถือ
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // สคริปต์ Lightbox รูปภาพ
         const galleryData = [
             { src: '9.-Jidori-Cuisine-Ken-4.jpg', caption: '📷 โซนเคาน์เตอร์บาร์' },
             { src: 'view.jpg', caption: '📷 ห้อง VIP ทาทามิ' },
@@ -376,24 +457,50 @@
             }
         });
 
-        // --- สคริปต์ควบคุมการเล่นเพลงอัตโนมัติ ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('bg-music');
-            audio.volume = 0.3; // ปรับความดังของเพลง (0.0 ถึง 1.0)
+        // 🎵 ระบบเล่นเพลงต่อเนื่องด้วย sessionStorage
+        const audio = document.getElementById('bg-music');
 
-            // พยายามสั่งเล่นเพลงทันที
-            const playPromise = audio.play();
+        audio.addEventListener('timeupdate', () => {
+            sessionStorage.setItem('bgm_time', audio.currentTime);
+        });
 
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // หากเบราว์เซอร์บล็อก Autoplay ไว้ เพลงจะเริ่มเล่นทันทีเมื่อมีการแตะหรือคลิกบนหน้าจอครั้งแรก
-                    const enableAudio = () => {
-                        audio.play();
-                        document.removeEventListener('click', enableAudio);
-                        document.removeEventListener('touchstart', enableAudio);
-                    };
-                    document.addEventListener('click', enableAudio);
-                    document.addEventListener('touchstart', enableAudio);
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('bgm_time', audio.currentTime);
+        });
+
+        function playAudio() {
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime && audio.currentTime === 0) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            audio.play().then(() => {
+                removePlayListeners();
+            }).catch(error => {
+                console.log("Autoplay blocked:", error);
+            });
+        }
+
+        function removePlayListeners() {
+            document.removeEventListener('click', playAudio);
+            document.removeEventListener('scroll', playAudio);
+            document.removeEventListener('touchstart', playAudio);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.volume = 0.3;
+
+            const savedTime = sessionStorage.getItem('bgm_time');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            let promise = audio.play();
+            if (promise !== undefined) {
+                promise.catch(() => {
+                    document.addEventListener('click', playAudio);
+                    document.addEventListener('scroll', playAudio);
+                    document.addEventListener('touchstart', playAudio);
                 });
             }
         });

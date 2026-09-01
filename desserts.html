@@ -48,6 +48,7 @@
             align-items: center; 
             padding: 1rem 2rem; 
             gap: 1rem;
+            position: relative;
         }
 
         .logo { 
@@ -57,6 +58,13 @@
             text-decoration: none; 
             letter-spacing: 2px; 
             white-space: nowrap;
+            z-index: 1002;
+        }
+
+        .nav-right-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .nav-links { 
@@ -95,6 +103,7 @@
             gap: 0.5rem;
             transition: 0.3s;
             white-space: nowrap;
+            z-index: 1002;
         }
 
         .cart-btn-nav:hover {
@@ -110,6 +119,39 @@
             font-weight: bold;
         }
 
+        /* ปุ่ม Hamburger สำหรับมือถือ */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* แอนิเมชันเปลี่ยนปุ่ม Hamburger เป็น X เมื่อเปิดเมนู */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
         /* --- Main Content --- */
         .container { 
             max-width: 1200px; 
@@ -119,27 +161,35 @@
         }
 
         /* ปุ่มย้อนกลับไปหน้าเมนูหลัก */
+        .back-btn-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            background-color: #ffffff;
             color: var(--dark);
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
             text-decoration: none;
-            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
             font-weight: bold;
-            margin-bottom: 1.5rem;
-            transition: 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .back-btn:hover {
             background-color: var(--primary);
-            color: #fff;
+            color: #ffffff;
             border-color: var(--primary);
+            transform: translateX(-3px);
         }
 
         .section-title { 
@@ -355,12 +405,13 @@
             background-color: #1eb857;
         }
 
+        /* --- Footer --- */
         footer { 
             background-color: var(--dark); 
             color: #fff; 
             text-align: center; 
             padding: 3rem 2rem; 
-            margin-top: 5rem; 
+            margin-top: auto; 
         }
 
         .footer-logo { 
@@ -375,37 +426,79 @@
         /* 📱 Responsive สำหรับการแสดงผลบนมือถือ */
         @media (max-width: 768px) { 
             nav {
-                flex-direction: column;
-                padding: 0.8rem 1rem;
-                gap: 0.8rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .hamburger {
+                display: flex;
             }
 
             .nav-links {
-                overflow-x: auto;
-                width: 100%;
-                padding-bottom: 0.3rem;
-                justify-content: flex-start;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                gap: 1.5rem;
+                transition: 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+                z-index: 1001;
             }
 
-            .container { margin: 1.5rem auto; }
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .container { margin: 1rem auto 2rem auto; }
             .section-title { font-size: 1.8rem; }
             .menu-category-title { font-size: 1.4rem; }
-            
-            .back-btn {
+
+            .back-btn-container {
                 margin-bottom: 1rem;
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
+            }
+
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.6rem;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- เครื่องเล่นเพลงพื้นหลังแบบเล่นต่อเนื่อง -->
+    <audio id="bg-music" loop style="display: none;">
+        <source src="sss.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
     <header>
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
 
-            <ul class="nav-links">
+            <div class="nav-right-container">
+                <!-- ปุ่มเปิดตะกร้าสินค้า -->
+                <button class="cart-btn-nav" id="cart-toggle">
+                    🛒 ตะกร้า <span class="cart-badge" id="cart-count">0</span>
+                </button>
+
+                <!-- ปุ่ม Hamburger เมนูสำหรับมือถือ -->
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="about.html">เกี่ยวกับเรา</a></li>
                 <li><a href="menu.html" class="active">เมนูอาหาร</a></li>
@@ -414,19 +507,16 @@
                 <li><a href="reservation.html">จองโต๊ะ</a></li>
                 <li><a href="contact.html">ติดต่อเรา</a></li>
             </ul>
-
-            <!-- ปุ่มเปิดตะกร้าสินค้า -->
-            <button class="cart-btn-nav" id="cart-toggle">
-                🛒 ตะกร้า <span class="cart-badge" id="cart-count">0</span>
-            </button>
         </nav>
     </header>
 
     <main class="container">
         <!-- ปุ่มย้อนกลับไปหน้าเมนูหลัก -->
-        <a href="menu.html" class="back-btn">
-            ❮ ย้อนกลับไปหน้าเมนูรวม
-        </a>
+        <div class="back-btn-container">
+            <a href="menu.html" class="back-btn">
+                ❮ ย้อนกลับไปหน้าเมนูรวม
+            </a>
+        </div>
 
         <h2 class="section-title">🍡 ของหวาน & เครื่องดื่ม</h2>
         <p class="section-subtitle">ปิดท้ายมื้ออร่อยด้วยขนมหวานสไตล์ญี่ปุ่นและเครื่องดื่มเย็นชื่นใจ</p>
@@ -609,32 +699,22 @@
         <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #ccc;">&copy; 2026 KIZUNA Japanese Restaurant. All Rights Reserved.</p>
     </footer>
 
-    <!-- เครื่องเล่นเพลงพื้นหลังแบบเล่นอัตโนมัติและซ่อนไว้ -->
-    <audio id="bg-music" autoplay loop style="display: none;">
-        <source src="sss.mp3" type="audio/mpeg">
-        เบราว์เซอร์ของคุณไม่รองรับการเล่นไฟล์เสียง
-    </audio>
-
     <script>
-        // --- ระบบเล่นเพลงพื้นหลังอัตโนมัติแบบซ่อน ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('bg-music');
-            audio.volume = 0.3; // ปรับความดังเพลง (0.0 ถึง 1.0)
+        // --- ระบบ Hamburger Menu สำหรับมือถือ ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
 
-            const playPromise = audio.play();
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
 
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // หากเบราว์เซอร์บล็อก Autoplay ให้เริ่มเล่นทันทีที่ผู้ใช้คลิก/แตะส่วนใดก็ได้บนหน้าเว็บ
-                    const enableAudio = () => {
-                        audio.play();
-                        document.removeEventListener('click', enableAudio);
-                        document.removeEventListener('touchstart', enableAudio);
-                    };
-                    document.addEventListener('click', enableAudio);
-                    document.addEventListener('touchstart', enableAudio);
-                });
-            }
+        // ปิดเมนูอัตโนมัติเมื่อกดคลิกลิงก์
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
 
         // --- ระบบตะกร้าสินค้า ---
@@ -733,6 +813,45 @@
             updateCartUI();
             modal.style.display = 'none';
         }
+
+        // 🎵 ระบบเล่นเพลงบรรยากาศต่อเนื่อง (SessionStorage Continuous Playback)
+        const audio = document.getElementById('bg-music');
+
+        // บันทึกตำแหน่งเวลาของเพลงก่อนออกจากหน้าเพจ
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('bgMusicTime', audio.currentTime);
+        });
+
+        function playAudio() {
+            audio.play().then(() => {
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('scroll', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+            }).catch(error => {
+                console.log("Autoplay blocked:", error);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.volume = 0.3; // ตั้งความดังไว้ที่ 30%
+
+            // โหลดตำแหน่งเพลงที่เคยเล่นค้างไว้ในหน้านี้หรือหน้าก่อนหน้า
+            const savedTime = sessionStorage.getItem('bgMusicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            let promise = audio.play();
+            
+            if (promise !== undefined) {
+                promise.catch(() => {
+                    // หากเบราว์เซอร์บล็อก Autoplay ให้รอผู้ใช้มีปฏิสัมพันธ์แรกแล้วค่อยเล่นต่อ
+                    document.addEventListener('click', playAudio);
+                    document.addEventListener('scroll', playAudio);
+                    document.addEventListener('touchstart', playAudio);
+                });
+            }
+        });
     </script>
 </body>
 </html>

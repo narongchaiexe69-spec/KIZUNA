@@ -48,6 +48,7 @@
             align-items: center; 
             padding: 1rem 2rem; 
             gap: 1rem;
+            position: relative;
         }
 
         .logo { 
@@ -57,6 +58,13 @@
             text-decoration: none; 
             letter-spacing: 2px; 
             white-space: nowrap;
+            z-index: 1002;
+        }
+
+        .nav-right-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .nav-links { 
@@ -95,6 +103,7 @@
             gap: 0.5rem;
             transition: 0.3s;
             white-space: nowrap;
+            z-index: 1002;
         }
 
         .cart-btn-nav:hover {
@@ -110,6 +119,39 @@
             font-weight: bold;
         }
 
+        /* ปุ่ม Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* แอนิเมชันปุ่ม Hamburger เมื่อเปิดเมนู */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
         /* --- Main Content --- */
         .container { 
             max-width: 1200px; 
@@ -118,7 +160,6 @@
             flex: 1;
         }
 
-        /* ปุ่มย้อนกลับสำหรับหน้าจอทุกขนาด (เน้นใช้งานบนมือถือ) */
         .back-btn-container {
             margin-bottom: 1.5rem;
         }
@@ -374,19 +415,37 @@
             background-color: #1eb857;
         }
 
-        /* 📱 Responsive */
+        /* 📱 Responsive Styles */
         @media (max-width: 768px) { 
             nav {
-                flex-direction: column;
-                padding: 0.8rem 1rem;
-                gap: 0.8rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .hamburger {
+                display: flex;
             }
 
             .nav-links {
-                overflow-x: auto;
-                width: 100%;
-                padding-bottom: 0.3rem;
-                justify-content: flex-start;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                gap: 1.5rem;
+                transition: 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+                z-index: 1001;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
             }
 
             .container { margin: 1.5rem auto; }
@@ -417,7 +476,21 @@
         <nav>
             <a href="index.html" class="logo">絆 KIZUNA</a>
 
-            <ul class="nav-links">
+            <div class="nav-right-container">
+                <!-- ปุ่มเปิดตะกร้าสินค้า -->
+                <button class="cart-btn-nav" id="cart-toggle">
+                    🛒 ตะกร้า <span class="cart-badge" id="cart-count">0</span>
+                </button>
+
+                <!-- ปุ่ม Hamburger เมนูสำหรับมือถือ -->
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="index.html">หน้าแรก</a></li>
                 <li><a href="about.html">เกี่ยวกับเรา</a></li>
                 <li><a href="menu.html" class="active">เมนูอาหาร</a></li>
@@ -426,11 +499,6 @@
                 <li><a href="reservation.html">จองโต๊ะ</a></li>
                 <li><a href="contact.html">ติดต่อเรา</a></li>
             </ul>
-
-            <!-- ปุ่มเปิดตะกร้าสินค้า -->
-            <button class="cart-btn-nav" id="cart-toggle">
-                🛒 ตะกร้า <span class="cart-badge" id="cart-count">0</span>
-            </button>
         </nav>
     </header>
 
@@ -589,6 +657,23 @@
     </div>
 
     <script>
+        // --- ระบบ Hamburger Menu ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // ปิดเมนูอัตโนมัติเมื่อกดคลิกลิงก์
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
         // --- ระบบตะกร้าสินค้า ---
         let cart = [];
 
@@ -618,11 +703,9 @@
             const cartItemsList = document.getElementById('cart-items');
             const totalPrice = document.getElementById('total-price');
 
-            // อัปเดตตัวเลขจำนวนชิ้นบนปุ่มตะกร้า
             const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
             cartCount.textContent = totalCount;
 
-            // อัปเดตรายการสินค้าภายใน Pop-up
             if (cart.length === 0) {
                 cartItemsList.innerHTML = '<p style="text-align: center; color: #888; padding: 2rem 0;">ไม่มีรายการในตะกร้า</p>';
             } else {
@@ -641,7 +724,6 @@
                 `).join('');
             }
 
-            // คำนวณราคารวมทั้งหมด
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             totalPrice.textContent = `฿${total.toLocaleString()}`;
         }
@@ -686,8 +768,13 @@
             modal.style.display = 'none';
         }
 
-        // 🎵 ระบบเล่นเพลงบรรยากาศซ่อนตัวเล่น
+        // 🎵 ระบบเล่นเพลงบรรยากาศต่อเนื่อง (SessionStorage Continuous Playback)
         const audio = document.getElementById('bg-music');
+
+        // อัปเดตบันทึกเวลาปัจจุบันของเพลงลงใน sessionStorage ก่อนเปลี่ยนหน้า
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('bgMusicTime', audio.currentTime);
+        });
 
         function playAudio() {
             audio.play().then(() => {
@@ -701,6 +788,13 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             audio.volume = 0.3;
+
+            // ตรวจสอบตำแหน่งเพลงเดิมที่เคยบันทึกไว้
+            const savedTime = sessionStorage.getItem('bgMusicTime');
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
             let promise = audio.play();
             
             if (promise !== undefined) {
